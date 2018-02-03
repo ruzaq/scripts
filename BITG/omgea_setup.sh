@@ -96,4 +96,4 @@ echo "masternodeaddress=$IP:$PORT" >> $CONF_DIR/omega.conf
 echo "masternodeprivkey=$PRIVKEY" >> $CONF_DIR/omega.conf
 sudo ufw allow $PORT/tcp
 
-omegacoind
+omegacoind -daemon
