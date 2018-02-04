@@ -43,10 +43,6 @@ if [[ $DOSETUP =~ "y" ]] ; then
   sudo echo "/var/swap.img none swap sw 0 0" >> /etc/fstab
   cd
 
-  wget https://github.com/omegacoinnetwork/omegacoin/releases/download/0.12.5/omegacoincore-0.12.5-linux64.tar.gz
-  tar -xzf omegacoincore*.tar.gz
-  sudo mv  omegacoincore*/bin/* /usr/bin
-
   sudo apt-get install -y ufw
   sudo ufw allow ssh/tcp
   sudo ufw limit ssh/tcp
@@ -59,8 +55,10 @@ if [[ $DOSETUP =~ "y" ]] ; then
   source ~/.bashrc
 fi
 
-## Setup conf
-mkdir -p ~/bin
+wget https://github.com/omegacoinnetwork/omegacoin/releases/download/0.12.5/omegacoincore-0.12.5-linux64.tar.gz
+tar -xzf omegacoincore*.tar.gz
+sudo mv  omegacoincore*/bin/* /usr/bin
+
 echo ""
 echo "Configure your masternodes now!"
 echo "Type the IP of this server, followed by [ENTER]:"
