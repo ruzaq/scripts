@@ -74,8 +74,8 @@ CONF_DIR=~/.Omega
 PORT=7777
 
 mkdir -p $CONF_DIR
-echo "rpcuser=longrando312musername" >> $CONF_DIR/omega.conf
-echo "rpcpassword=longerdarandompassword" >> $CONF_DIR/omega.conf
+echo "rpcuser=user"`shuf -i 100000-10000000 -n 1` >> $CONF_DIR/omega.conf
+echo "rpcpassword=pass"`shuf -i 100000-10000000 -n 1` >> $CONF_DIR/omega.conf
 echo "rpcallowip=127.0.0.1" >> $CONF_DIR/omega.conf
 echo "rpcport=$RPCPORT" >> $CONF_DIR/omega.conf
 echo "listen=1" >> $CONF_DIR/omega.conf
@@ -87,7 +87,7 @@ echo "masternode=1" >> $CONF_DIR/omega.conf
 echo "" >> $CONF_DIR/omega.conf
 
 echo "addnode=142.208.127.121" >> $CONF_DIR/omega.conf
-echo "addnode==154.208.127.121" >> $CONF_DIR/omega.conf
+echo "addnode=154.208.127.121" >> $CONF_DIR/omega.conf
 echo "addnode=142.208.122.127" >> $CONF_DIR/omega.conf
 
 echo "" >> $CONF_DIR/omega.conf
