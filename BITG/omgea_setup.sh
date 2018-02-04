@@ -68,7 +68,7 @@ echo ""
 echo "Enter masternode private key for node $ALIAS"
 read PRIVKEY
 
-CONF_DIR=~/.Omega
+CONF_DIR=~/.omegacoincore/
 PORT=7777
 
 mkdir -p $CONF_DIR
