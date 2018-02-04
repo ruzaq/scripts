@@ -104,8 +104,8 @@ for i in `seq 1 1 $MNCOUNT`; do
   chmod 755 ~/bin/bitcoingreen*.sh
 
   mkdir -p $CONF_DIR
-  echo "rpcuser=longrandomusername" >> bitcoingreen.conf_TEMP
-  echo "rpcpassword=longerrandompassword" >> bitcoingreen.conf_TEMP
+  echo "rpcuser=user"`shuf -i 100000-10000000 -n 1` >> bitcoingreen.conf_TEMP
+  echo "rpcpassword=pass"`shuf -i 100000-10000000 -n 1` >> bitcoingreen.conf_TEMP
   echo "rpcallowip=127.0.0.1" >> bitcoingreen.conf_TEMP
   echo "rpcport=$RPCPORT" >> bitcoingreen.conf_TEMP
   echo "listen=1" >> bitcoingreen.conf_TEMP
