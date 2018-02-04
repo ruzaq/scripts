@@ -69,29 +69,30 @@ echo "Enter masternode private key for node $ALIAS"
 read PRIVKEY
 
 CONF_DIR=~/.omegacoincore/
+CONF_FILE=omegacoin.conf
 PORT=7777
 
 mkdir -p $CONF_DIR
-echo "rpcuser=user"`shuf -i 100000-10000000 -n 1` >> $CONF_DIR/omega.conf
-echo "rpcpassword=pass"`shuf -i 100000-10000000 -n 1` >> $CONF_DIR/omega.conf
-echo "rpcallowip=127.0.0.1" >> $CONF_DIR/omega.conf
-echo "rpcport=$RPCPORT" >> $CONF_DIR/omega.conf
-echo "listen=1" >> $CONF_DIR/omega.conf
-echo "server=1" >> $CONF_DIR/omega.conf
-echo "daemon=1" >> $CONF_DIR/omega.conf
-echo "logtimestamps=1" >> $CONF_DIR/omega.conf
-echo "maxconnections=256" >> $CONF_DIR/omega.conf
-echo "masternode=1" >> $CONF_DIR/omega.conf
-echo "" >> $CONF_DIR/omega.conf
+echo "rpcuser=user"`shuf -i 100000-10000000 -n 1` >> $CONF_DIR/$CONF_FILE
+echo "rpcpassword=pass"`shuf -i 100000-10000000 -n 1` >> $CONF_DIR/$CONF_FILE
+echo "rpcallowip=127.0.0.1" >> $CONF_DIR/$CONF_FILE
+echo "rpcport=$RPCPORT" >> $CONF_DIR/$CONF_FILE
+echo "listen=1" >> $CONF_DIR/$CONF_FILE
+echo "server=1" >> $CONF_DIR/$CONF_FILE
+echo "daemon=1" >> $CONF_DIR/$CONF_FILE
+echo "logtimestamps=1" >> $CONF_DIR/$CONF_FILE
+echo "maxconnections=256" >> $CONF_DIR/$CONF_FILE
+echo "masternode=1" >> $CONF_DIR/$CONF_FILE
+echo "" >> $CONF_DIR/$CONF_FILE
 
-echo "addnode=142.208.127.121" >> $CONF_DIR/omega.conf
-echo "addnode=154.208.127.121" >> $CONF_DIR/omega.conf
-echo "addnode=142.208.122.127" >> $CONF_DIR/omega.conf
+echo "addnode=142.208.127.121" >> $CONF_DIR/$CONF_FILE
+echo "addnode=154.208.127.121" >> $CONF_DIR/$CONF_FILE
+echo "addnode=142.208.122.127" >> $CONF_DIR/$CONF_FILE
 
-echo "" >> $CONF_DIR/omega.conf
-echo "port=$PORT" >> $CONF_DIR/omega.conf
-echo "masternodeaddress=$IP:$PORT" >> $CONF_DIR/omega.conf
-echo "masternodeprivkey=$PRIVKEY" >> $CONF_DIR/omega.conf
+echo "" >> $CONF_DIR/$CONF_FILE
+echo "port=$PORT" >> $CONF_DIR/$CONF_FILE
+echo "masternodeaddress=$IP:$PORT" >> $CONF_DIR/$CONF_FILE
+echo "masternodeprivkey=$PRIVKEY" >> $CONF_DIR/$CONF_FILE
 sudo ufw allow $PORT/tcp
 
 omegacoind -daemon
