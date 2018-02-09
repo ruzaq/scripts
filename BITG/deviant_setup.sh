@@ -69,6 +69,7 @@ echo "Enter masternode private key for node $ALIAS"
 read PRIVKEY
 
 CONF_DIR=~/.Deviant/
+mkdir $CONF_DIR
 CONF_FILE=Deviant.conf
 PORT=7118
 
@@ -94,4 +95,4 @@ echo "masternodeaddress=$IP:$PORT" >> $CONF_DIR/$CONF_FILE
 echo "masternodeprivkey=$PRIVKEY" >> $CONF_DIR/$CONF_FILE
 sudo ufw allow $PORT/tcp
 
-omegacoind -daemon
+Deviantd -daemon
