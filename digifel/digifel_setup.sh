@@ -4,7 +4,7 @@ cd ~
 echo "****************************************************************************"
 echo "* Ubuntu 16.04 is the recommended opearting system for this install.       *"
 echo "*                                                                          *"
-echo "* This script will install and configure your Deviant Coin masternodes.    *"
+echo "* This script will install and configure your Dfigifel Coin masternodes.   *"
 echo "****************************************************************************"
 echo && echo && echo
 echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
@@ -55,9 +55,13 @@ if [[ $DOSETUP =~ "y" ]] ; then
   source ~/.bashrc
 fi
 
-wget "https://github.com/Deviantcoin/Wallet/raw/master/Deviantcoin%20(Linux).zip"
-unzip Deviant*
-sudo mv  Deviant*/* /usr/bin
+## Build
+git clone https://github.com/digifel/digifel-core
+cd digifel-core
+./autogen.sh
+./configure
+make
+sudo make install
 
 echo ""
 echo "Configure your masternodes now!"
@@ -68,10 +72,11 @@ echo ""
 echo "Enter masternode private key for node $ALIAS"
 read PRIVKEY
 
-CONF_DIR=~/.Deviant/
+cd
+CONF_DIR=~/.digifelcore/
 mkdir $CONF_DIR
-CONF_FILE=Deviant.conf
-PORT=7118
+CONF_FILE=digifel.conf
+PORT=10070
 
 echo "rpcuser=user"`shuf -i 100000-10000000 -n 1` >> $CONF_DIR/$CONF_FILE
 echo "rpcpassword=pass"`shuf -i 100000-10000000 -n 1` >> $CONF_DIR/$CONF_FILE
@@ -82,7 +87,8 @@ echo "daemon=1" >> $CONF_DIR/$CONF_FILE
 echo "logtimestamps=1" >> $CONF_DIR/$CONF_FILE
 echo "maxconnections=256" >> $CONF_DIR/$CONF_FILE
 echo "masternode=1" >> $CONF_DIR/$CONF_FILE
-echo "port=$PORT"
+echo "externalip=$IP" >> $CONF_DIR/$CONF_FILE
+echo "bind=$IP" >> $CONF_DIR/$CONF_FILE
 echo "" >> $CONF_DIR/$CONF_FILE
 
 #echo "addnode=142.208.127.121" >> $CONF_DIR/$CONF_FILE
@@ -95,4 +101,4 @@ echo "masternodeaddress=$IP:$PORT" >> $CONF_DIR/$CONF_FILE
 echo "masternodeprivkey=$PRIVKEY" >> $CONF_DIR/$CONF_FILE
 sudo ufw allow $PORT/tcp
 
-Deviantd -daemon
+digifeld -daemon
