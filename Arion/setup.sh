@@ -43,6 +43,7 @@ if [[ $DOSETUP =~ "y" ]] ; then
   sudo echo "/var/swap.img none swap sw 0 0" >> /etc/fstab
   cd
 
+  #make -f makefile.unix USE_UPNP=-
   wget beachcombersoftware.za.net/ariond
   sudo chmod 755 ariond
   sudo mv ariond /usr/bin
