@@ -115,12 +115,22 @@ for i in `seq 1 1 $MNCOUNT`; do
   echo "maxconnections=256" >> bitcoingreen.conf_TEMP
   echo "masternode=1" >> bitcoingreen.conf_TEMP
   echo "" >> bitcoingreen.conf_TEMP
-  echo "addnode=134.255.232.212" >> bitcoingreen.conf_TEMP
-  echo "addnode=207.148.26.77" >> bitcoingreen.conf_TEMP
-  echo "addnode=108.61.103.123" >> bitcoingreen.conf_TEMP
-  echo "addnode=185.239.238.89" >> bitcoingreen.conf_TEMP
-  echo "addnode=185.239.238.92" >> bitcoingreen.conf_TEMP
-  echo "addnode=207.148.26.77" >> bitcoingreen.conf_TEMP
+
+  echo "addnode=addnode=51.15.198.252" >> bitcoingreen.conf_TEMP
+  echo "addnode=addnode=51.15.206.123" >> bitcoingreen.conf_TEMP
+  echo "addnode=addnode=51.15.66.234" >> bitcoingreen.conf_TEMP
+  echo "addnode=addnode=51.15.86.224" >> bitcoingreen.conf_TEMP
+  echo "addnode=addnode=51.15.89.27" >> bitcoingreen.conf_TEMP
+  echo "addnode=addnode=51.15.57.193" >> bitcoingreen.conf_TEMP
+  echo "addnode=addnode=134.255.232.212" >> bitcoingreen.conf_TEMP
+  echo "addnode=addnode=185.239.238.237" >> bitcoingreen.conf_TEMP
+  echo "addnode=addnode=185.239.238.240" >> bitcoingreen.conf_TEMP
+  echo "addnode=addnode=134.255.232.212" >> bitcoingreen.conf_TEMP
+  echo "addnode=addnode=207.148.26.77" >> bitcoingreen.conf_TEMP
+  echo "addnode=addnode=207.148.19.239" >> bitcoingreen.conf_TEMP
+  echo "addnode=addnode=108.61.103.123" >> bitcoingreen.conf_TEMP
+  echo "addnode=addnode=185.239.238.89" >> bitcoingreen.conf_TEMP
+  echo "addnode=addnode=185.239.238.92" >> bitcoingreen.conf_TEMP
 
   echo "" >> bitcoingreen.conf_TEMP
   echo "port=$PORT" >> bitcoingreen.conf_TEMP
