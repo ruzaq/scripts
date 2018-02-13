@@ -51,7 +51,7 @@ if [[ $DOSETUP =~ "y" ]] ; then
   sudo ufw allow ssh/tcp
   sudo ufw limit ssh/tcp
   sudo ufw logging on
-  sudo ufw enable
+  echo "y" | sudo ufw enable
   sudo ufw status
 
   mkdir -p ~/bin
