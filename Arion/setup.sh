@@ -44,9 +44,6 @@ if [[ $DOSETUP =~ "y" ]] ; then
   cd
 
   #make -f makefile.unix USE_UPNP=-
-  wget beachcombersoftware.za.net/ariond
-  sudo chmod 755 ariond
-  sudo mv ariond /usr/bin
 
   sudo apt-get install -y ufw
   sudo ufw allow ssh/tcp
@@ -59,6 +56,13 @@ if [[ $DOSETUP =~ "y" ]] ; then
   echo 'export PATH=~/bin:$PATH' > ~/.bash_aliases
   source ~/.bashrc
 fi
+
+## COMPILE AND INSTALL
+cd Arion/src
+make -f makefile.unix USE_UPNP=-
+sudo chmod 755 ariond
+sudo mv ariond /usr/bin
+
 
 ## Setup conf
 mkdir -p ~/bin
