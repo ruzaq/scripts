@@ -28,7 +28,7 @@ if [[ $DOSETUP =~ "y" ]] ; then
   sudo apt-get install -y libevent-dev
   sudo apt-get install -y libminiupnpc-dev
   sudo apt-get install -y autoconf
-  sudo apt-get install -y automake unzip
+  sudo apt-get install -y automake unzip libgmp-dev
   sudo add-apt-repository  -y  ppa:bitcoin/bitcoin
   sudo apt-get update
   sudo apt-get install -y libdb4.8-dev libdb4.8++-dev
@@ -43,26 +43,23 @@ if [[ $DOSETUP =~ "y" ]] ; then
   sudo echo "/var/swap.img none swap sw 0 0" >> /etc/fstab
   cd
 
-  #make -f makefile.unix USE_UPNP=-
+  ## COMPILE AND INSTALL
+  cd Arion/src
+  make -f makefile.unix USE_UPNP=-
+  sudo chmod 755 ariond
+  sudo mv ariond /usr/bin
 
   sudo apt-get install -y ufw
   sudo ufw allow ssh/tcp
   sudo ufw limit ssh/tcp
   sudo ufw logging on
-  sudo ufw enable
+  echo "y" | sudo ufw enable
   sudo ufw status
 
   mkdir -p ~/bin
   echo 'export PATH=~/bin:$PATH' > ~/.bash_aliases
   source ~/.bashrc
 fi
-
-## COMPILE AND INSTALL
-cd Arion/src
-make -f makefile.unix USE_UPNP=-
-sudo chmod 755 ariond
-sudo mv ariond /usr/bin
-
 
 ## Setup conf
 mkdir -p ~/bin
