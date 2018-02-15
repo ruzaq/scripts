@@ -44,7 +44,8 @@ if [[ $DOSETUP =~ "y" ]] ; then
   cd
 
   ## COMPILE AND INSTALL
-  cd Arion/src
+  git clone https://github.com/arioncoin/arioncoin
+  cd arioncoin/src
   make -f makefile.unix USE_UPNP=-
   sudo chmod 755 ariond
   sudo mv ariond /usr/bin
@@ -115,8 +116,8 @@ for i in `seq 1 1 $MNCOUNT`; do
   echo "" >> arion.conf_TEMP
   echo "addnode=51.15.198.252" >> arion.conf_TEMP
   echo "addnode=51.15.206.123" >> arion.conf_TEMP
-  #echo "addnode=108.61.103.123" >> arion.conf_TEMP
-  #echo "addnode=185.239.238.89" >> arion.conf_TEMP
+  echo "addnode=80.208.227.4" >> arion.conf_TEMP
+  echo "addnode=89.47.167.199" >> arion.conf_TEMP
   #echo "addnode=185.239.238.92" >> arion.conf_TEMP
   #echo "addnode=207.148.26.77" >> arion.conf_TEMP
   
