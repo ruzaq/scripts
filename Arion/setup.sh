@@ -98,11 +98,7 @@ for i in `seq 1 1 $MNCOUNT`; do
 
   # Create scripts
   echo '#!/bin/bash' > ~/bin/ariond_$ALIAS.sh
-  echo "ariond -daemon -conf=$CONF_DIR/arion.conf -datadir=$CONF_DIR "'$*' >> ~/bin/ariond_$ALIAS.sh
-  echo '#!/bin/bash' > ~/bin/arion-cli_$ALIAS.sh
-  echo "arion-cli -conf=$CONF_DIR/arion.conf -datadir=$CONF_DIR "'$*' >> ~/bin/arion-cli_$ALIAS.sh
-  echo '#!/bin/bash' > ~/bin/arion-tx_$ALIAS.sh
-  echo "arion-tx -conf=$CONF_DIR/arion.conf -datadir=$CONF_DIR "'$*' >> ~/bin/arion-tx_$ALIAS.sh 
+  echo "ariond -conf=$CONF_DIR/arion.conf -datadir=$CONF_DIR "'$*' >> ~/bin/ariond_$ALIAS.sh
   chmod 755 ~/bin/arion*.sh
 
   mkdir -p $CONF_DIR
