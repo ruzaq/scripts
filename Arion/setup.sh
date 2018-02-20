@@ -118,9 +118,15 @@ for i in `seq 1 1 $MNCOUNT`; do
   echo "addnode=51.15.206.123" >> arion.conf_TEMP
   echo "addnode=80.208.227.4" >> arion.conf_TEMP
   echo "addnode=89.47.167.199" >> arion.conf_TEMP
-  #echo "addnode=185.239.238.92" >> arion.conf_TEMP
-  #echo "addnode=207.148.26.77" >> arion.conf_TEMP
-  
+  echo "addnode=addnode=159.65.190.55" >> arion.conf_TEMP
+  echo "addnode=addnode=159.65.182.89" >> arion.conf_TEMP
+  echo "addnode=addnode=159.65.168.243" >> arion.conf_TEMP
+  echo "addnode=addnode=159.65.191.124" >> arion.conf_TEMP
+  echo "addnode=addnode=159.65.191.68" >> arion.conf_TEMP
+  echo "addnode=addnode=159.65.42.61" >> arion.conf_TEMP
+  echo "addnode=addnode=159.65.176.88" >> arion.conf_TEMP
+  echo "addnode=addnode=159.89.188.89" >> arion.conf_TEMP
+
   echo "" >> arion.conf_TEMP
   echo "port=$PORT" >> arion.conf_TEMP
   echo "masternodeaddress=$IP:$PORT" >> arion.conf_TEMP
