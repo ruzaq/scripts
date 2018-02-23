@@ -129,7 +129,7 @@ for i in `seq 1 1 $MNCOUNT`; do
 
   echo "" >> arion.conf_TEMP
   echo "port=$PORT" >> arion.conf_TEMP
-  echo "masternodeaddress=$IP:$PORT" >> arion.conf_TEMP
+  echo "masternodeaddr=$IP:$PORT" >> arion.conf_TEMP
   echo "masternodeprivkey=$PRIVKEY" >> arion.conf_TEMP
   sudo ufw allow $PORT/tcp
 
