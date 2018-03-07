@@ -17,13 +17,18 @@ echo && echo && echo
 GIT="https://github.com/MotileCoin/MotileCoin"
 SRC="MotileCoin/src"
 DAEMON="Motiled"
-COMPILE_CMD=cd $SRC && make -f makefile.unix USE_UPNP=- && sudo mv $DAEMON /usr/bin
 
 CONF_DIR=~/.Motile/
-mkdir $CONF_DIR
+mkdir -p $CONF_DIR
 CONF_FILE=Motile.conf
 PORT=7218
 IP=ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p'
+
+function compile() {
+  cd $SRC
+  make -f makefile.unix USE_UPNP=-
+  sudo mv $DAEMON /usr/bin
+}
 
 echo "Do you want to install all needed dependencies (no if you did it before)? [y/n]"
 read DOSETUP
@@ -70,7 +75,7 @@ if [[ $DOSETUP =~ "y" ]] ; then
 fi
 
 git clone $GIT
-$COMPILE_CMD
+compile
 
 echo ""
 echo "Enter masternode private key for node $ALIAS"
