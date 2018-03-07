@@ -22,7 +22,7 @@ CONF_DIR=~/.Motile/
 mkdir -p $CONF_DIR
 CONF_FILE=Motile.conf
 PORT=7218
-IP=ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p'
+IP=`ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p'`
 
 function compile() {
   cd $SRC
