@@ -134,7 +134,7 @@ for i in `seq 1 1 $MNCOUNT`; do
 
   echo "" >> bitcoingreen.conf_TEMP
   echo "port=$PORT" >> bitcoingreen.conf_TEMP
-  echo "masternodeaddress=$IP:$PORT" >> bitcoingreen.conf_TEMP
+  echo "masternodeaddr=$IP:$PORT" >> bitcoingreen.conf_TEMP
   echo "masternodeprivkey=$PRIVKEY" >> bitcoingreen.conf_TEMP
   sudo ufw allow $PORT/tcp
 

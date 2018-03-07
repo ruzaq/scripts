@@ -4,7 +4,7 @@ cd ~
 echo "****************************************************************************"
 echo "* Ubuntu 16.04 is the recommended opearting system for this install.       *"
 echo "*                                                                          *"
-echo "* This script will install and configure your Dfigifel Coin masternodes.   *"
+echo "* This script will install and configure your Motile Coin masternodes.     *"
 echo "****************************************************************************"
 echo && echo && echo
 echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
@@ -16,6 +16,16 @@ echo && echo && echo
 
 echo "Do you want to install all needed dependencies (no if you did it before)? [y/n]"
 read DOSETUP
+
+GIT="https://github.com/MotileCoin/MotileCoin"
+SRC="MotileCoin"
+DAEMON="Motiled"
+COMPILE_CMD=cd $SRC && make -f makefile.unix USE_UPNP=- && sudo mv $DAEMON /usr/bin
+
+CONF_DIR=~/.Motile/
+mkdir $CONF_DIR
+CONF_FILE=Motile.conf
+PORT=7218
 
 if [[ $DOSETUP =~ "y" ]] ; then
   sudo apt-get update
@@ -55,13 +65,8 @@ if [[ $DOSETUP =~ "y" ]] ; then
   source ~/.bashrc
 fi
 
-## Build
-git clone https://github.com/digifel/digifel-core
-cd digifel-core
-./autogen.sh
-./configure
-make
-sudo make install
+git pull $GIT
+$COMPILE_CMD
 
 echo ""
 echo "Configure your masternodes now!"
@@ -72,12 +77,6 @@ echo ""
 echo "Enter masternode private key for node $ALIAS"
 read PRIVKEY
 
-cd
-CONF_DIR=~/.digifelcore/
-mkdir $CONF_DIR
-CONF_FILE=digifel.conf
-PORT=10070
-
 echo "rpcuser=user"`shuf -i 100000-10000000 -n 1` >> $CONF_DIR/$CONF_FILE
 echo "rpcpassword=pass"`shuf -i 100000-10000000 -n 1` >> $CONF_DIR/$CONF_FILE
 echo "rpcallowip=127.0.0.1" >> $CONF_DIR/$CONF_FILE
@@ -87,18 +86,11 @@ echo "daemon=1" >> $CONF_DIR/$CONF_FILE
 echo "logtimestamps=1" >> $CONF_DIR/$CONF_FILE
 echo "maxconnections=256" >> $CONF_DIR/$CONF_FILE
 echo "masternode=1" >> $CONF_DIR/$CONF_FILE
-echo "externalip=$IP" >> $CONF_DIR/$CONF_FILE
-echo "bind=$IP" >> $CONF_DIR/$CONF_FILE
-echo "" >> $CONF_DIR/$CONF_FILE
-
-#echo "addnode=142.208.127.121" >> $CONF_DIR/$CONF_FILE
-#echo "addnode=154.208.127.121" >> $CONF_DIR/$CONF_FILE
-#echo "addnode=142.208.122.127" >> $CONF_DIR/$CONF_FILE
-
 echo "" >> $CONF_DIR/$CONF_FILE
 echo "port=$PORT" >> $CONF_DIR/$CONF_FILE
 echo "masternodeaddr=$IP:$PORT" >> $CONF_DIR/$CONF_FILE
 echo "masternodeprivkey=$PRIVKEY" >> $CONF_DIR/$CONF_FILE
 sudo ufw allow $PORT/tcp
 
-digifeld -daemon
+sudo chmod 755 $DAEMON
+$DAEMON -daemon
