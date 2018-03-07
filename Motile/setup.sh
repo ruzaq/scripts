@@ -14,11 +14,8 @@ echo "!                                                 !"
 echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 echo && echo && echo
 
-echo "Do you want to install all needed dependencies (no if you did it before)? [y/n]"
-read DOSETUP
-
 GIT="https://github.com/MotileCoin/MotileCoin"
-SRC="MotileCoin"
+SRC="MotileCoin/src"
 DAEMON="Motiled"
 COMPILE_CMD=cd $SRC && make -f makefile.unix USE_UPNP=- && sudo mv $DAEMON /usr/bin
 
@@ -26,6 +23,10 @@ CONF_DIR=~/.Motile/
 mkdir $CONF_DIR
 CONF_FILE=Motile.conf
 PORT=7218
+IP=ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p'
+
+echo "Do you want to install all needed dependencies (no if you did it before)? [y/n]"
+read DOSETUP
 
 if [[ $DOSETUP =~ "y" ]] ; then
   sudo apt-get update
@@ -53,12 +54,15 @@ if [[ $DOSETUP =~ "y" ]] ; then
   sudo echo "/var/swap.img none swap sw 0 0" >> /etc/fstab
   cd
 
-  sudo apt-get install -y ufw
+  sudo apt-get install -y ufw fail2ban
   sudo ufw allow ssh/tcp
   sudo ufw limit ssh/tcp
   sudo ufw logging on
   echo "y" | sudo ufw enable
   sudo ufw status
+
+  systemctl enable fail2ban >/dev/null 2>&1
+  systemctl start fail2ban >/dev/null 2>&1
 
   mkdir -p ~/bin
   echo 'export PATH=~/bin:$PATH' > ~/.bash_aliases
@@ -67,11 +71,6 @@ fi
 
 git clone $GIT
 $COMPILE_CMD
-
-echo ""
-echo "Configure your masternodes now!"
-echo "Type the IP of this server, followed by [ENTER]:"
-read IP
 
 echo ""
 echo "Enter masternode private key for node $ALIAS"
@@ -92,5 +91,5 @@ echo "masternodeaddr=$IP:$PORT" >> $CONF_DIR/$CONF_FILE
 echo "masternodeprivkey=$PRIVKEY" >> $CONF_DIR/$CONF_FILE
 sudo ufw allow $PORT/tcp
 
-sudo chmod 755 $DAEMON
+sudo chmod 755 /usr/bin/$DAEMON
 $DAEMON -daemon
