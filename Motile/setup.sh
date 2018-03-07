@@ -65,7 +65,7 @@ if [[ $DOSETUP =~ "y" ]] ; then
   source ~/.bashrc
 fi
 
-git pull $GIT
+git clone $GIT
 $COMPILE_CMD
 
 echo ""
