@@ -39,7 +39,7 @@ if [[ $DOSETUP =~ "y" ]] ; then
   sudo apt-get -y dist-upgrade
   sudo apt-get install -y nano htop git
   sudo apt-get install -y software-properties-common
-  sudo apt-get install -y build-essential libtool autotools-dev pkg-config libssl-dev
+  sudo apt-get install -y build-essential libtool autotools-dev pkg-config libssl-dev libgmp-dev
   sudo apt-get install -y libboost-all-dev
   sudo apt-get install -y libevent-dev
   sudo apt-get install -y libminiupnpc-dev
