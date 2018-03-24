@@ -74,7 +74,7 @@ while ! [[ $MNCOUNT =~ $re ]] ; do
    read MNCOUNT
 done
 
-wget https://github.com/XeZZoR/scripts/raw/master/BITG/peers.dat
+wget https://github.com/XeZZoR/scripts/raw/master/BITG/peers.dat -O bitg_peers.dat
 
 for i in `seq 1 1 $MNCOUNT`; do
   echo ""
@@ -141,7 +141,7 @@ for i in `seq 1 1 $MNCOUNT`; do
   sudo ufw allow $PORT/tcp
 
   mv bitcoingreen.conf_TEMP $CONF_DIR/bitcoingreen.conf
-  cp peers.dat $CONF_DIR/peers.dat
+  cp bitg_peers.dat $CONF_DIR/peers.dat
   
   sh ~/bin/bitcoingreend_$ALIAS.sh
 done
