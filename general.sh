@@ -9,7 +9,7 @@ sudo apt-get install -y build-essential libtool autotools-dev pkg-config libssl-
 sudo apt-get install -y libboost-all-dev
 sudo apt-get install -y libevent-dev
 sudo apt-get install -y libminiupnpc-dev libgmp-dev
-sudo apt-get install -y autoconf
+sudo apt-get install -y autoconf virtualenv
 sudo apt-get install -y automake unzip
 sudo add-apt-repository  -y  ppa:bitcoin/bitcoin
 sudo apt-get update
