@@ -100,38 +100,38 @@ for i in `seq 1 1 $MNCOUNT`; do
   read RPCPORT
 
   ALIAS=${ALIAS,,}
-  CONF_DIR=~/.$NAME_$ALIAS
+  CONF_DIR=~/.${NAME}_$ALIAS
 
   # Create scripts
-  echo '#!/bin/bash' > ~/bin/$NAMEd_$ALIAS.sh
-  echo "$NAMEd -daemon -conf=$CONF_DIR/$NAME.conf -datadir=$CONF_DIR "'$*' >> ~/bin/$NAMEd_$ALIAS.sh
-  echo '#!/bin/bash' > ~/bin/$NAME-cli_$ALIAS.sh
-  echo "$NAME-cli -conf=$CONF_DIR/$NAME.conf -datadir=$CONF_DIR "'$*' >> ~/bin/$NAME-cli_$ALIAS.sh
-  echo '#!/bin/bash' > ~/bin/$NAME-tx_$ALIAS.sh
-  echo "$NAME-tx -conf=$CONF_DIR/$NAME.conf -datadir=$CONF_DIR "'$*' >> ~/bin/$NAME-tx_$ALIAS.sh 
-  chmod 755 ~/bin/$NAME*.sh
+  echo '#!/bin/bash' > ~/bin/${NAME}d_$ALIAS.sh
+  echo "${NAME}d -daemon -conf=$CONF_DIR/${NAME}.conf -datadir=$CONF_DIR "'$*' >> ~/bin/${NAME}d_$ALIAS.sh
+  echo '#!/bin/bash' > ~/bin/${NAME}-cli_$ALIAS.sh
+  echo "${NAME}-cli -conf=$CONF_DIR/${NAME}.conf -datadir=$CONF_DIR "'$*' >> ~/bin/${NAME}-cli_$ALIAS.sh
+  echo '#!/bin/bash' > ~/bin/${NAME}-tx_$ALIAS.sh
+  echo "${NAME}-tx -conf=$CONF_DIR/${NAME}.conf -datadir=$CONF_DIR "'$*' >> ~/bin/${NAME}-tx_$ALIAS.sh 
+  chmod 755 ~/bin/${NAME}*.sh
 
   mkdir -p $CONF_DIR
-  echo "rpcuser=user"`shuf -i 100000-10000000 -n 1` >> $NAME.conf_TEMP
-  echo "rpcpassword=pass"`shuf -i 100000-10000000 -n 1` >> $NAME.conf_TEMP
-  echo "rpcallowip=127.0.0.1" >> $NAME.conf_TEMP
-  echo "rpcport=$RPCPORT" >> $NAME.conf_TEMP
-  echo "listen=1" >> $NAME.conf_TEMP
-  echo "server=1" >> $NAME.conf_TEMP
-  echo "daemon=1" >> $NAME.conf_TEMP
-  echo "logtimestamps=1" >> $NAME.conf_TEMP
-  echo "maxconnections=256" >> $NAME.conf_TEMP
-  echo "masternode=1" >> $NAME.conf_TEMP
-  echo "" >> $NAME.conf_TEMP
+  echo "rpcuser=user"`shuf -i 100000-10000000 -n 1` >> ${NAME}.conf_TEMP
+  echo "rpcpassword=pass"`shuf -i 100000-10000000 -n 1` >> ${NAME}.conf_TEMP
+  echo "rpcallowip=127.0.0.1" >> ${NAME}.conf_TEMP
+  echo "rpcport=$RPCPORT" >> ${NAME}.conf_TEMP
+  echo "listen=1" >> ${NAME}.conf_TEMP
+  echo "server=1" >> ${NAME}.conf_TEMP
+  echo "daemon=1" >> ${NAME}.conf_TEMP
+  echo "logtimestamps=1" >> ${NAME}.conf_TEMP
+  echo "maxconnections=256" >> ${NAME}.conf_TEMP
+  echo "masternode=1" >> ${NAME}.conf_TEMP
+  echo "" >> ${NAME}.conf_TEMP
 
-  echo "" >> $NAME.conf_TEMP
-  echo "port=$PORT" >> $NAME.conf_TEMP
-  echo "masternodeaddr=$IP:$PORT" >> $NAME.conf_TEMP
-  echo "masternodeprivkey=$PRIVKEY" >> $NAME.conf_TEMP
+  echo "" >> ${NAME}.conf_TEMP
+  echo "port=$PORT" >> ${NAME}.conf_TEMP
+  echo "masternodeaddr=$IP:$PORT" >> ${NAME}.conf_TEMP
+  echo "masternodeprivkey=$PRIVKEY" >> ${NAME}.conf_TEMP
   sudo ufw allow $PORT/tcp
 
-  mv $NAME.conf_TEMP $CONF_DIR/$NAME.conf
+  mv ${NAME}.conf_TEMP $CONF_DIR/${NAME}.conf
   cp apr_peers.dat $CONF_DIR/peers.dat
   
-  sh ~/bin/$NAMEd_$ALIAS.sh
+  sh ~/bin/${NAME}d_$ALIAS.sh
 done
