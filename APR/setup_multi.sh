@@ -88,16 +88,16 @@ for i in `seq 1 1 $MNCOUNT`; do
   read ALIAS  
 
   echo ""
-  echo "Enter port for node $ALIAS"
+  echo "Enter port for node $ALIAS (Any valid free port matching config from steps before: i.E. 8001)"
   read PORT
+
+  echo ""
+  echo "Enter RPC Port (Any valid free port: i.E. 9001)"
+  read RPCPORT
 
   echo ""
   echo "Enter masternode private key for node $ALIAS"
   read PRIVKEY
-
-  echo ""
-  echo "Enter RPC Port (Any valid free port: i.E. 17100)"
-  read RPCPORT
 
   ALIAS=${ALIAS,,}
   CONF_DIR=~/.${NAME}_$ALIAS
