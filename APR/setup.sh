@@ -63,6 +63,13 @@ wget https://github.com/XeZZoR/scripts/raw/master/APR/aprcoind
 sudo chmod 755 aprcoin*
 sudo mv aprcoin* /usr/bin
 
+CONF_DIR=~/.aprcoin/
+mkdir $CONF_DIR
+CONF_FILE=aprcoin.conf
+PORT=3133
+
+wget https://github.com/XeZZoR/scripts/raw/master/APR/peers.dat -O $CONF_DIR/peers.dat
+
 echo ""
 echo "Configure your masternodes now!"
 echo "Type the IP of this server, followed by [ENTER]:"
@@ -71,13 +78,6 @@ read IP
 echo ""
 echo "Enter masternode private key for node $ALIAS"
 read PRIVKEY
-
-CONF_DIR=~/.aprcoin/
-mkdir $CONF_DIR
-CONF_FILE=aprcoin.conf
-PORT=3133
-
-wget https://github.com/XeZZoR/scripts/raw/master/APR/peers.dat -O $CONF_DIR/peers.dat
 
 echo "rpcuser=user"`shuf -i 100000-10000000 -n 1` >> $CONF_DIR/$CONF_FILE
 echo "rpcpassword=pass"`shuf -i 100000-10000000 -n 1` >> $CONF_DIR/$CONF_FILE
