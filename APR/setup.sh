@@ -72,7 +72,7 @@ echo ""
 echo "Enter masternode private key for node $ALIAS"
 read PRIVKEY
 
-CONF_DIR=~/.AprCoin/
+CONF_DIR=~/.aprcoin/
 mkdir $CONF_DIR
 CONF_FILE=aprcoin.conf
 PORT=3133
