@@ -92,5 +92,4 @@ echo "masternodeaddr=$IP:$PORT" >> $CONF_DIR/$CONF_FILE
 echo "masternodeprivkey=$PRIVKEY" >> $CONF_DIR/$CONF_FILE
 sudo ufw allow $PORT/tcp
 
-sudo chmod 755 /usr/bin/Deviantd
 ducatd -daemon
