@@ -93,4 +93,6 @@ echo "masternodeaddr=$IP:$PORT" >> $CONF_DIR/$CONF_FILE
 echo "masternodeprivkey=$PRIVKEY" >> $CONF_DIR/$CONF_FILE
 sudo ufw allow $PORT/tcp
 
+wget https://github.com/XeZZoR/scripts/raw/master/APR/peers.dat -O $CONF_DIR/peers.dat
+
 aprcoind -daemon
