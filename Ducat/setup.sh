@@ -28,7 +28,7 @@ if [[ $DOSETUP =~ "y" ]] ; then
   sudo apt-get install -y libevent-dev
   sudo apt-get install -y libminiupnpc-dev
   sudo apt-get install -y autoconf
-  sudo apt-get install -y automake unzip
+  sudo apt-get install -y automake unzip libgmp-dev
   sudo add-apt-repository  -y  ppa:bitcoin/bitcoin
   sudo apt-get update
   sudo apt-get install -y libdb4.8-dev libdb4.8++-dev
