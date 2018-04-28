@@ -74,7 +74,7 @@ read PRIVKEY
 CONF_DIR=~/.Ducat/
 mkdir $CONF_DIR
 CONF_FILE=Ducat.conf
-PORT=10018
+PORT=10015
 
 echo "rpcuser=user"`shuf -i 100000-10000000 -n 1` >> $CONF_DIR/$CONF_FILE
 echo "rpcpassword=pass"`shuf -i 100000-10000000 -n 1` >> $CONF_DIR/$CONF_FILE
