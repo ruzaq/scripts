@@ -66,6 +66,9 @@ fi
 ## Setup conf
 mkdir -p ~/bin
 IP=`ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p'`
+wget https://github.com/XeZZoR/scripts/raw/master/APR/peers.dat -O apr_peers.dat
+NAME="aprcoin"
+
 
 MNCOUNT=""
 re='^[0-9]+$'
@@ -74,10 +77,6 @@ while ! [[ $MNCOUNT =~ $re ]] ; do
    echo "How many nodes do you want to create on this server?, followed by [ENTER]:"
    read MNCOUNT
 done
-
-wget https://github.com/XeZZoR/scripts/raw/master/APR/peers.dat -O apr_peers.dat
-
-NAME="aprcoin"
 
 for i in `seq 1 1 $MNCOUNT`; do
   echo ""
@@ -98,6 +97,7 @@ for i in `seq 1 1 $MNCOUNT`; do
 
   ALIAS=${ALIAS,,}
   CONF_DIR=~/.${NAME}_$ALIAS
+  CONF_FILE=aprcoin.conf
 
   # Create scripts
   echo '#!/bin/bash' > ~/bin/${NAME}d_$ALIAS.sh
