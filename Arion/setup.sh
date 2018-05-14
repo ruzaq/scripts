@@ -58,8 +58,8 @@ fi
 ## COMPILE AND INSTALL
 wget https://s3.amazonaws.com/arion-builds/v1.1.6/linux-x64.tar.gz
 tar -xzf linux*
-sudo chmod 755 linux*/bin/arion*
-sudo mv linux*/arion* /usr/bin
+sudo chmod 755 arion*
+sudo mv arion* /usr/bin
 
 CONF_DIR=~/.arioncore/
 mkdir $CONF_DIR
