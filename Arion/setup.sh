@@ -4,7 +4,7 @@ cd ~
 echo "****************************************************************************"
 echo "* Ubuntu 16.04 is the recommended opearting system for this install.       *"
 echo "*                                                                          *"
-echo "* This script will install and configure your Arion Coin masternodes.      *"
+echo "* This script will install and configure your ARION Coin masternodes.      *"
 echo "****************************************************************************"
 echo && echo && echo
 echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
@@ -28,7 +28,7 @@ if [[ $DOSETUP =~ "y" ]] ; then
   sudo apt-get install -y libevent-dev
   sudo apt-get install -y libminiupnpc-dev
   sudo apt-get install -y autoconf
-  sudo apt-get install -y automake unzip libgmp-dev
+  sudo apt-get install -y automake unzip
   sudo add-apt-repository  -y  ppa:bitcoin/bitcoin
   sudo apt-get update
   sudo apt-get install -y libdb4.8-dev libdb4.8++-dev
@@ -43,13 +43,6 @@ if [[ $DOSETUP =~ "y" ]] ; then
   sudo echo "/var/swap.img none swap sw 0 0" >> /etc/fstab
   cd
 
-  ## COMPILE AND INSTALL
-  git clone https://github.com/arioncoin/arioncoin
-  cd arioncoin/src
-  make -f makefile.unix USE_UPNP=-
-  sudo chmod 755 ariond
-  sudo mv ariond /usr/bin
-
   sudo apt-get install -y ufw
   sudo ufw allow ssh/tcp
   sudo ufw limit ssh/tcp
@@ -62,78 +55,38 @@ if [[ $DOSETUP =~ "y" ]] ; then
   source ~/.bashrc
 fi
 
-## Setup conf
-mkdir -p ~/bin
+## COMPILE AND INSTALL
+wget https://s3.amazonaws.com/arion-builds/v1.1.6/linux-x64.tar.gz
+tar -xzf linux*
+sudo chmod 755 linux*/bin/arion*
+sudo mv linux*/arion* /usr/bin
+
+CONF_DIR=~/.arioncore/
+mkdir $CONF_DIR
+CONF_FILE=arion.conf
+PORT=44144
+
+IP=`ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p'`
+
 echo ""
-echo "Configure your masternodes now!"
-echo "Type the IP of this server, followed by [ENTER]:"
-read IP
+echo "Enter masternode private key for node $ALIAS"
+read PRIVKEY
 
-MNCOUNT=""
-re='^[0-9]+$'
-while ! [[ $MNCOUNT =~ $re ]] ; do
-   echo ""
-   echo "How many nodes do you want to create on this server?, followed by [ENTER]:"
-   read MNCOUNT
-done
+echo "rpcuser=user"`shuf -i 100000-10000000 -n 1` >> $CONF_DIR/$CONF_FILE
+echo "rpcpassword=pass"`shuf -i 100000-10000000 -n 1` >> $CONF_DIR/$CONF_FILE
+echo "rpcallowip=127.0.0.1" >> $CONF_DIR/$CONF_FILE
+echo "listen=1" >> $CONF_DIR/$CONF_FILE
+echo "server=1" >> $CONF_DIR/$CONF_FILE
+echo "daemon=1" >> $CONF_DIR/$CONF_FILE
+echo "logtimestamps=1" >> $CONF_DIR/$CONF_FILE
+echo "maxconnections=256" >> $CONF_DIR/$CONF_FILE
+echo "masternode=1" >> $CONF_DIR/$CONF_FILE
+echo "" >> $CONF_DIR/$CONF_FILE
+echo "" >> $CONF_DIR/$CONF_FILE
+echo "port=$PORT" >> $CONF_DIR/$CONF_FILE
+echo "masternodeaddr=$IP:$PORT" >> $CONF_DIR/$CONF_FILE
+echo "masternodeprivkey=$PRIVKEY" >> $CONF_DIR/$CONF_FILE
 
-for i in `seq 1 1 $MNCOUNT`; do
-  echo ""
-  echo "Enter alias for new node"
-  read ALIAS  
+sudo ufw allow $PORT/tcp
 
-  echo ""
-  echo "Enter port for node $ALIAS"
-  read PORT
-
-  echo ""
-  echo "Enter masternode private key for node $ALIAS"
-  read PRIVKEY
-
-  echo ""
-  echo "Enter RPC Port (Any valid free port: i.E. 17200)"
-  read RPCPORT
-
-  ALIAS=${ALIAS,,}
-  CONF_DIR=~/.Arion_$ALIAS
-
-  # Create scripts
-  echo '#!/bin/bash' > ~/bin/ariond_$ALIAS.sh
-  echo "ariond -conf=$CONF_DIR/arion.conf -datadir=$CONF_DIR "'$*' >> ~/bin/ariond_$ALIAS.sh
-  chmod 755 ~/bin/arion*.sh
-
-  mkdir -p $CONF_DIR
-  echo "rpcuser=user"`shuf -i 100000-10000000 -n 1` >> arion.conf_TEMP
-  echo "rpcpassword=pass"`shuf -i 100000-10000000 -n 1` >> arion.conf_TEMP
-  echo "rpcallowip=127.0.0.1" >> arion.conf_TEMP
-  echo "rpcport=$RPCPORT" >> arion.conf_TEMP
-  echo "listen=1" >> arion.conf_TEMP
-  echo "server=1" >> arion.conf_TEMP
-  echo "daemon=1" >> arion.conf_TEMP
-  echo "logtimestamps=1" >> arion.conf_TEMP
-  echo "maxconnections=256" >> arion.conf_TEMP
-  echo "masternode=1" >> arion.conf_TEMP
-  echo "" >> arion.conf_TEMP
-  echo "addnode=51.15.198.252" >> arion.conf_TEMP
-  echo "addnode=51.15.206.123" >> arion.conf_TEMP
-  echo "addnode=80.208.227.4" >> arion.conf_TEMP
-  echo "addnode=89.47.167.199" >> arion.conf_TEMP
-  echo "addnode=159.65.190.55" >> arion.conf_TEMP
-  echo "addnode=159.65.182.89" >> arion.conf_TEMP
-  echo "addnode=159.65.168.243" >> arion.conf_TEMP
-  echo "addnode=159.65.191.124" >> arion.conf_TEMP
-  echo "addnode=159.65.191.68" >> arion.conf_TEMP
-  echo "addnode=159.65.42.61" >> arion.conf_TEMP
-  echo "addnode=159.65.176.88" >> arion.conf_TEMP
-  echo "addnode=159.89.188.89" >> arion.conf_TEMP
-
-  echo "" >> arion.conf_TEMP
-  echo "port=$PORT" >> arion.conf_TEMP
-  echo "masternodeaddr=$IP:$PORT" >> arion.conf_TEMP
-  echo "masternodeprivkey=$PRIVKEY" >> arion.conf_TEMP
-  sudo ufw allow $PORT/tcp
-
-  mv arion.conf_TEMP $CONF_DIR/arion.conf
-  
-  sh ~/bin/ariond_$ALIAS.sh
-done
+ariond -daemon
