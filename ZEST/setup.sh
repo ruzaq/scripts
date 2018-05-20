@@ -65,7 +65,7 @@ fi
 mkdir -p ~/bin
 IP=$(curl -s4 icanhazip.com)
 #wget https://github.com/XeZZoR/scripts/raw/master/ZEST/peers.dat -O zest_peers.dat
-NAME="Zest"
+NAME="zest"
 CONF_FILE=zest.conf
 
 MNCOUNT=""
