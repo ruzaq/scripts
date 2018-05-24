@@ -10,7 +10,7 @@ if [[ $UPDATE =~ "1" ]] ; then
   done
 
   # update wallet
-  rm -r zest-*.tar.gz zest-1.0.0
+  rm -r zest*
   wget https://github.com/ZestFoundation/ZestCoin/releases/download/v1.0.1/zest-1.0.1-x86_64-linux-gnu.tar.gz
   tar -xzf zest-*
   sudo chmod 755 zest*/bin/zest*
