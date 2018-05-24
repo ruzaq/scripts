@@ -3,7 +3,7 @@
 echo "Enter 1 to update, enter 2 to check status (Press enter after) ONLY UPDATE ONCE!!!!!"
 read UPDATE
 
-if [[ $DOSETUP =~ "1" ]] ; then
+if [[ UPDATE =~ "1" ]] ; then
 
   for filename in bin/zest-cli_*.sh; do
     sh $filename stop
