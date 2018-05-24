@@ -44,7 +44,8 @@ if [[ $DOSETUP =~ "y" ]] ; then
   cd
 
   ## INSTALL
-  wget https://github.com/ZestFoundation/ZestCoin/releases/download/v1.0.0/zest-1.0.0-x86_64-linux-gnu.tar.gz
+  rm zest-*.tar.gz zest-1.0.0
+  wget https://github.com/ZestFoundation/ZestCoin/releases/download/v1.0.1/zest-1.0.1-x86_64-linux-gnu.tar.gz
   tar -xzf zest-*
   sudo chmod 755 zest*/bin/zest*
   sudo mv zest*/bin/zest* /usr/bin
