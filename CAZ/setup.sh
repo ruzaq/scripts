@@ -58,7 +58,7 @@ fi
 ## COMPILE AND INSTALL
 wget https://github.com/copicogithub1/cazcoin/releases/download/v.1.1.0/cazcoin-1.1.0-x86_64-linux-gnu.tar.gz
 tar -xzf cazcoin*
-sudo chmod 755 cazcoin*/bin/cazcoind*
+sudo chmod 755 cazcoin*/bin/cazcoin*
 sudo mv cazcoin*/bin/cazcoin* /usr/bin
 
 CONF_DIR=~/.cazcoin/

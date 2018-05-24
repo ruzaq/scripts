@@ -11,7 +11,7 @@ if [[ $DOSETUP =~ "1" ]] ; then
 
   # update wallet
   rm zest-*.tar.gz
-  wget https://github.com/ZestFoundation/ZestCoin/releases/download/v1.0.0/zest-1.0.0-x86_64-linux-gnu.tar.gz
+  wget https://github.com/ZestFoundation/ZestCoin/releases/download/v1.0.1/zest-1.0.1-x86_64-linux-gnu.tar.gz
   tar -xzf zest-*
   sudo chmod 755 zest*/bin/zest*
   sudo mv zest*/bin/zest* /usr/bin
