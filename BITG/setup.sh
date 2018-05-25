@@ -1,7 +1,5 @@
 #!/bin/bash
 
-URL_BITG="https://github.com/bitcoingreen/bitcoingreen/releases/download/1.1.0/bitcoingreen-1.1.0-x86_64-linux-gnu.tar.gz"
-
 cd ~
 echo "****************************************************************************"
 echo "* Ubuntu 16.04 is the recommended opearting system for this install.       *"
@@ -15,6 +13,10 @@ echo "! Make sure you double check before hitting enter !"
 echo "!                                                 !"
 echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 echo && echo && echo
+
+URL_BITG="https://github.com/bitcoingreen/bitcoingreen/releases/download/1.1.0/bitcoingreen-1.1.0-x86_64-linux-gnu.tar.gz"
+URL_BITG_PEERS=" https://github.com/XeZZoR/scripts/raw/master/BITG/peers.dat"
+
 
 echo "Do you want to install all needed dependencies (no if you did it before)? [y/n]"
 read DOSETUP
@@ -80,7 +82,7 @@ while ! [[ ${MNCOUNT} =~ $re ]] ; do
    read MNCOUNT
 done
 
-wget https://github.com/XeZZoR/scripts/raw/master/BITG/peers.dat -O bitg_peers.dat
+wget ${URL_BITG_PEERS} -O bitg_peers.dat
 
 for i in `seq 1 1 ${MNCOUNT}`; do
   echo ""
