@@ -1,4 +1,6 @@
-#/bin/bash
+#!/bin/bash
+
+URL_BITG="https://github.com/bitcoingreen/bitcoingreen/releases/download/1.1.0/bitcoingreen-1.1.0-x86_64-linux-gnu.tar.gz"
 
 cd ~
 echo "****************************************************************************"
@@ -17,7 +19,7 @@ echo && echo && echo
 echo "Do you want to install all needed dependencies (no if you did it before)? [y/n]"
 read DOSETUP
 
-if [[ $DOSETUP =~ "y" ]] ; then
+if [[ ${DOSETUP} =~ "y" ]] ; then
   sudo apt-get update
   sudo apt-get -y upgrade
   sudo apt-get -y dist-upgrade
@@ -43,13 +45,17 @@ if [[ $DOSETUP =~ "y" ]] ; then
   sudo echo "/var/swap.img none swap sw 0 0" >> /etc/fstab
   cd
 
-  wget https://github.com/bitcoingreen/bitcoingreen/releases/download/1.1.0/bitcoingreen-1.1.0-x86_64-linux-gnu.tar.gz
+  wget "${URL_BITG}"
   tar -xzf bitcoingreen*.tar.gz
   sudo mv  bitcoingreen*/bin/* /usr/bin
 
+  # Check for SSHd port configured
+  PORT_SSHD_CONFIG="$(grep -e '^Port ' /etc/ssh/sshd_config| head -n 1 |awk '{print $2}')"
+  PORT_SSHD=${PORT_SSHD_CONFIG:-22} 
+
   sudo apt-get install -y ufw
-  sudo ufw allow ssh/tcp
-  sudo ufw limit ssh/tcp
+  sudo ufw allow ${PORT_SSHD}
+  sudo ufw limit ${PORT_SSHD}
   sudo ufw logging on
   echo "y" | sudo ufw enable
   sudo ufw status
@@ -68,7 +74,7 @@ read IP
 
 MNCOUNT=""
 re='^[0-9]+$'
-while ! [[ $MNCOUNT =~ $re ]] ; do
+while ! [[ ${MNCOUNT} =~ $re ]] ; do
    echo ""
    echo "How many nodes do you want to create on this server?, followed by [ENTER]:"
    read MNCOUNT
@@ -76,17 +82,17 @@ done
 
 wget https://github.com/XeZZoR/scripts/raw/master/BITG/peers.dat -O bitg_peers.dat
 
-for i in `seq 1 1 $MNCOUNT`; do
+for i in `seq 1 1 ${MNCOUNT}`; do
   echo ""
   echo "Enter alias for new node"
   read ALIAS  
 
   echo ""
-  echo "Enter port for node $ALIAS"
+  echo "Enter port for node ${ALIAS}"
   read PORT
 
   echo ""
-  echo "Enter masternode private key for node $ALIAS"
+  echo "Enter masternode private key for node ${ALIAS}"
   read PRIVKEY
 
   echo ""
@@ -94,22 +100,22 @@ for i in `seq 1 1 $MNCOUNT`; do
   read RPCPORT
 
   ALIAS=${ALIAS,,}
-  CONF_DIR=~/.bitcoingreen_$ALIAS
+  CONF_DIR=~/.bitcoingreen_${ALIAS}
 
   # Create scripts
-  echo '#!/bin/bash' > ~/bin/bitcoingreend_$ALIAS.sh
-  echo "bitcoingreend -daemon -conf=$CONF_DIR/bitcoingreen.conf -datadir=$CONF_DIR "'$*' >> ~/bin/bitcoingreend_$ALIAS.sh
+  echo '#!/bin/bash' > ~/bin/bitcoingreend_${ALIAS}.sh
+  echo "bitcoingreend -daemon -conf=${CONF_DIR}/bitcoingreen.conf -datadir=${CONF_DIR} "'$*' >> ~/bin/bitcoingreend_${ALIAS}.sh
   echo '#!/bin/bash' > ~/bin/bitcoingreen-cli_$ALIAS.sh
-  echo "bitcoingreen-cli -conf=$CONF_DIR/bitcoingreen.conf -datadir=$CONF_DIR "'$*' >> ~/bin/bitcoingreen-cli_$ALIAS.sh
-  echo '#!/bin/bash' > ~/bin/bitcoingreen-tx_$ALIAS.sh
-  echo "bitcoingreen-tx -conf=$CONF_DIR/bitcoingreen.conf -datadir=$CONF_DIR "'$*' >> ~/bin/bitcoingreen-tx_$ALIAS.sh 
+  echo "bitcoingreen-cli -conf=${CONF_DIR}/bitcoingreen.conf -datadir=${CONF_DIR} "'$*' >> ~/bin/bitcoingreen-cli_${ALIAS}.sh
+  echo '#!/bin/bash' > ~/bin/bitcoingreen-tx_${ALIAS}.sh
+  echo "bitcoingreen-tx -conf=${CONF_DIR}/bitcoingreen.conf -datadir=${CONF_DIR} "'$*' >> ~/bin/bitcoingreen-tx_${ALIAS}.sh 
   chmod 755 ~/bin/bitcoingreen*.sh
 
-  mkdir -p $CONF_DIR
+  mkdir -p ${CONF_DIR}
   echo "rpcuser=user"`shuf -i 100000-10000000 -n 1` >> bitcoingreen.conf_TEMP
   echo "rpcpassword=pass"`shuf -i 100000-10000000 -n 1` >> bitcoingreen.conf_TEMP
   echo "rpcallowip=127.0.0.1" >> bitcoingreen.conf_TEMP
-  echo "rpcport=$RPCPORT" >> bitcoingreen.conf_TEMP
+  echo "rpcport=${RPCPORT}" >> bitcoingreen.conf_TEMP
   echo "listen=1" >> bitcoingreen.conf_TEMP
   echo "server=1" >> bitcoingreen.conf_TEMP
   echo "daemon=1" >> bitcoingreen.conf_TEMP
@@ -135,13 +141,12 @@ for i in `seq 1 1 $MNCOUNT`; do
   echo "addnode=addnode=185.239.238.92" >> bitcoingreen.conf_TEMP
 
   echo "" >> bitcoingreen.conf_TEMP
-  echo "port=$PORT" >> bitcoingreen.conf_TEMP
-  echo "masternodeaddr=$IP:$PORT" >> bitcoingreen.conf_TEMP
-  echo "masternodeprivkey=$PRIVKEY" >> bitcoingreen.conf_TEMP
+  echo "port=${PORT}" >> bitcoingreen.conf_TEMP
+  echo "masternodeaddr=${IP}:${PORT}" >> bitcoingreen.conf_TEMP
+  echo "masternodeprivkey=${PRIVKEY}" >> bitcoingreen.conf_TEMP
   sudo ufw allow $PORT/tcp
 
-  mv bitcoingreen.conf_TEMP $CONF_DIR/bitcoingreen.conf
-  cp bitg_peers.dat $CONF_DIR/peers.dat
+  mv bitcoingreen.conf_TEMP ${CONF_DIR}/bitcoingreen.conf
   
-  sh ~/bin/bitcoingreend_$ALIAS.sh
+  sh ~/bin/bitcoingreend_${ALIAS}.sh
 done
