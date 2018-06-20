@@ -119,9 +119,9 @@ for i in `seq 1 1 $MNCOUNT`; do
   echo "masternodeprivkey=$PRIVKEY" >> ${NAME}.conf_TEMP
 
   echo "" >> ${NAME}.conf_TEMP
-  echo "140.72.47.201" >> ${NAME}.conf_TEMP
-  echo "8.9.3.216" >> ${NAME}.conf_TEMP
-  echo "63.209.32.131" >> ${NAME}.conf_TEMP
+  echo "addnode=140.72.47.201" >> ${NAME}.conf_TEMP
+  echo "addnode=8.9.3.216" >> ${NAME}.conf_TEMP
+  echo "addnode=63.209.32.131" >> ${NAME}.conf_TEMP
 
   sudo ufw allow $PORT/tcp
   mv ${NAME}.conf_TEMP $CONF_DIR/${NAME}.conf
