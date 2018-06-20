@@ -44,9 +44,11 @@ if [[ $DOSETUP =~ "y" ]] ; then
   cd
 
   ## COMPILE AND INSTALL
-  https://github.com/MONKEYPROJECT/Monkey/releases/download/v2.1.2/monkeyd-v2.1.2-linux.zip
-  sudo chmod 755 monkey*
-  sudo mv monkey* /usr/bin
+  wget https://github.com/MONKEYPROJECT/Monkey/releases/download/v2.1.2/monkeyd-v2.1.2-linux.zip
+  unzip monkeyd*
+  sudo chmod 755 monkeyd
+  sudo mv monkeyd /usr/bin
+  rm monkeyd*
 
   sudo apt-get install -y ufw
   sudo ufw allow ssh/tcp
@@ -62,10 +64,8 @@ fi
 
 ## Setup conf
 mkdir -p ~/bin
-IP=`ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p'`
-wget https://github.com/XeZZoR/scripts/raw/master/APR/peers.dat -O apr_peers.dat
+IP=$(curl -s4 icanhazip.com)
 NAME="monkey"
-
 
 MNCOUNT=""
 re='^[0-9]+$'

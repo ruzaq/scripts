@@ -70,7 +70,7 @@ PORT=3133
 
 wget https://github.com/XeZZoR/scripts/raw/master/APR/peers.dat -O $CONF_DIR/peers.dat
 
-IP=`ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p'`
+IP=$(curl -s4 icanhazip.com)
 
 echo ""
 echo "Enter masternode private key for node $ALIAS"
