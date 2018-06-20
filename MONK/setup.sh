@@ -112,15 +112,18 @@ for i in `seq 1 1 $MNCOUNT`; do
   echo "logtimestamps=1" >> ${NAME}.conf_TEMP
   echo "maxconnections=256" >> ${NAME}.conf_TEMP
   echo "masternode=1" >> ${NAME}.conf_TEMP
-  echo "" >> ${NAME}.conf_TEMP
 
   echo "" >> ${NAME}.conf_TEMP
   echo "port=$PORT" >> ${NAME}.conf_TEMP
   echo "masternodeaddr=$IP:$PORT" >> ${NAME}.conf_TEMP
   echo "masternodeprivkey=$PRIVKEY" >> ${NAME}.conf_TEMP
 
-  sudo ufw allow $PORT/tcp
+  echo "" >> ${NAME}.conf_TEMP
+  echo "140.72.47.201" >> ${NAME}.conf_TEMP
+  echo "8.9.3.216" >> ${NAME}.conf_TEMP
+  echo "63.209.32.131" >> ${NAME}.conf_TEMP
 
+  sudo ufw allow $PORT/tcp
   mv ${NAME}.conf_TEMP $CONF_DIR/${NAME}.conf
 
   sh ~/bin/${NAME}d_$ALIAS.sh
