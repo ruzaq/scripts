@@ -86,6 +86,12 @@ echo "logtimestamps=1" >> $CONF_DIR/$CONF_FILE
 echo "maxconnections=256" >> $CONF_DIR/$CONF_FILE
 echo "masternode=1" >> $CONF_DIR/$CONF_FILE
 echo "" >> $CONF_DIR/$CONF_FILE
+
+echo "addnode=46.101.61.220:10015" >> $CONF_DIR/$CONF_FILE
+echo "addnode=45.77.58.196:10015" >> $CONF_DIR/$CONF_FILE
+echo "addnode=209.250.228.241:10015" >> $CONF_DIR/$CONF_FILE
+echo "addnode=209.250.226.12:10015" >> $CONF_DIR/$CONF_FILE
+
 echo "" >> $CONF_DIR/$CONF_FILE
 echo "port=$PORT" >> $CONF_DIR/$CONF_FILE
 echo "masternodeaddr=$IP:$PORT" >> $CONF_DIR/$CONF_FILE
