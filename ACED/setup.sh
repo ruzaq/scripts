@@ -62,7 +62,7 @@ sudo chmod 755 ubuntu16mn/aced*
 sudo mv ubuntu16mn/aced* /usr/bin
 rm -r ubuntu16mn*
 
-CONF_DIR=~/.aced/
+CONF_DIR=~/.acedcore/
 mkdir $CONF_DIR
 CONF_FILE=aced.conf
 PORT=24126
@@ -103,4 +103,4 @@ echo "addnode=144.202.45.55" >> $CONF_DIR/$CONF_FILE
 
 sudo ufw allow $PORT/tcp
 
-aprcoind -daemon
+acedd -daemon
