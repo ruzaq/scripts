@@ -67,8 +67,6 @@ mkdir $CONF_DIR
 CONF_FILE=blocknode.conf
 PORT=37001
 
-wget https://github.com/XeZZoR/scripts/raw/master/APR/peers.dat -O $CONF_DIR/peers.dat
-
 IP=$(curl -s4 icanhazip.com)
 
 echo ""
