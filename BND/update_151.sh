@@ -8,7 +8,7 @@ mv blocknode-1.5.1/bin/blocknode* /usr/bin
 blocknode-cli stop
 sleep 10
 cd .blocknode
-rm -r backups/ banlist.dat blocks/ budget.dat chainstate/ db.log debug.log fee_estimates.dat masternode.conf mncache.dat mnpayments.dat sporkat zerocoin/
+rm -r backups/ banlist.dat blocks/ budget.dat chainstate/ db.log debug.log fee_estimates.dat masternode.conf mncache.dat mnpayments.dat sporks/ zerocoin/
 blocknoded
 echo "Wait for blockchain to restart...."
 sleep 60
