@@ -58,8 +58,8 @@ fi
 ## COMPILE AND INSTALL
 wget https://github.com/blocknodetech/blocknode/releases/download/v1.4.15/blocknode-1.4.15-x86_64-linux-gnu.tar.gz
 tar -xzf blocknode-1.4.15-x86_64-linux-gnu.tar.gz
-mv blocknode*/bin/blocknode* bin
-sudo chmod 755 bin/blocknode*
+mv blocknode*/bin/blocknode* /usr/bin
+sudo chmod 755 /usr/bin/blocknode*
 rm -r blocknode-1.4*
 
 CONF_DIR=~/.blocknode/
