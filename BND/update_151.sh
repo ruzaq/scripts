@@ -5,6 +5,7 @@ tar -xzf blocknode-1.5.1-x86_64-linux-gnu.tar.gz
 chmod 755 blocknode-1.5.1/bin/*
 rm bin/blocknode* /usr/bin/blocknode*
 mv blocknode-1.5.1/bin/blocknode* /usr/bin
+rm -r blocknode-1.5.1*
 blocknode-cli stop
 sleep 10
 cd .blocknode
