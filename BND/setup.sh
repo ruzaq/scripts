@@ -56,11 +56,11 @@ if [[ $DOSETUP =~ "y" ]] ; then
 fi
 
 ## COMPILE AND INSTALL
-wget https://github.com/blocknodetech/blocknode/releases/download/v1.5.1/blocknode-1.5.1-x86_64-linux-gnu.tar.gz
-tar -xzf blocknode-1.5.1-x86_64-linux-gnu.tar.gz
-chmod 755 blocknode-1.5.1/bin/*
+wget https://github.com/blocknodetech/blocknode/releases/download/v1.5.2/blocknode-1.5.2-x86_64-linux-gnu.tar.gz
+tar -xzf blocknode-1.5.2-x86_64-linux-gnu.tar.gz
+chmod 755 blocknode-1.5.2/bin/*
 rm bin/blocknode* /usr/bin/blocknode*
-mv blocknode-1.5.1/bin/blocknode* /usr/bin
+mv blocknode-1.5.2/bin/blocknode* /usr/bin
 
 CONF_DIR=~/.blocknode/
 mkdir $CONF_DIR
