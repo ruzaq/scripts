@@ -1,11 +1,11 @@
 #!/bin/bash
 
-wget https://github.com/blocknodetech/blocknode/releases/download/v1.5.1/blocknode-1.5.1-x86_64-linux-gnu.tar.gz
-tar -xzf blocknode-1.5.1-x86_64-linux-gnu.tar.gz
-chmod 755 blocknode-1.5.1/bin/*
+wget https://github.com/blocknodetech/blocknode/releases/download/v1.5.2/blocknode-1.5.2-x86_64-linux-gnu.tar.gz
+tar -xzf blocknode-1.5.2-x86_64-linux-gnu.tar.gz
+chmod 755 blocknode-1.5.2/bin/*
 rm bin/blocknode* /usr/bin/blocknode*
-mv blocknode-1.5.1/bin/blocknode* /usr/bin
-rm -r blocknode-1.5.1*
+mv blocknode-1.5.2/bin/blocknode* /usr/bin
+rm -r blocknode-1.5.2*
 blocknode-cli stop
 sleep 10
 cd .blocknode
