@@ -8,9 +8,9 @@ read UPDATE
 
 
 if [[ $UPDATE =~ "1" ]] ; then
-    if [[ $OK =~"yes" ]]; then
-      echo "You have to go to your GUI Wallet now and restart ALL nodes on it! before you continue! Type yes to proceed"
-      read OK
+    echo "You have to go to your GUI Wallet now and restart ALL nodes on it! before you continue! Type yes to proceed"
+    read OK
+    if [[ $OK =~ "yes" ]]; then
 
       for filename in bin/bitcoingreen-cli_*.sh; do
         sh $filename stop
