@@ -26,14 +26,15 @@ if [[ $UPDATE =~ "1" ]] ; then
 
       rm .bitcoingreen_*/mn*
 
+      echo "Wait for shutdowns..."
       sleep 30
 
       for filename in bin/bitcoingreend_*.sh; do
         sh $filename
       done
-      echo "Wait for blockchain to restart...."
+      echo "Wait for blockchain to restart... (ca 3 mins)"
 
-      sleep 60
+      sleep 180
 
       for filename in bin/bitcoingreen-cli_*.sh; do
         sh $filename masternode status
