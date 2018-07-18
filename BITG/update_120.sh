@@ -8,7 +8,7 @@ if [[ $UPDATE =~ "1" ]] ; then
   wget https://github.com/bitcoingreen/bitcoingreen/releases/download/1.2.0/bitcoingreen-1.2.0-x86_64-linux-gnu.tar.gz
   tar -xzf bitcoingreen-1.2.0-x86_64-linux-gnu.tar.gz
   chmod 755 bitcoingreen-1.2.0/bin/*
-  rm bin/bitcoingreen* /usr/bin/bitcoingreen*
+  rm /usr/bin/bitcoingreen*
   mv bitcoingreen-1.2.0/bin/bitcoingreen* /usr/bin
   rm -r bitcoingreen-1.2.0
 
@@ -16,7 +16,7 @@ if [[ $UPDATE =~ "1" ]] ; then
     sh $filename stop
   done
 
-  sleep 10
+  sleep 30
 
   for filename in bin/bitcoingreend_*.sh; do
     sh $filename
