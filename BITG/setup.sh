@@ -43,7 +43,7 @@ if [[ $DOSETUP =~ "y" ]] ; then
   sudo echo "/var/swap.img none swap sw 0 0" >> /etc/fstab
   cd
 
-  wget https://github.com/bitcoingreen/bitcoingreen/releases/download/1.1.0/bitcoingreen-1.1.0-x86_64-linux-gnu.tar.gz
+  wget https://github.com/bitcoingreen/bitcoingreen/releases/download/1.2.0/bitcoingreen-1.2.0-x86_64-linux-gnu.tar.gz
   tar -xzf bitcoingreen*.tar.gz
   sudo mv  bitcoingreen*/bin/* /usr/bin
 
