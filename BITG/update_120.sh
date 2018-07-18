@@ -27,7 +27,7 @@ if [[ $UPDATE =~ "1" ]] ; then
       rm .bitcoingreen_*/mn*
 
       echo "Wait for shutdowns..."
-      sleep 30
+      sleep 60
 
       for filename in bin/bitcoingreend_*.sh; do
         sh $filename
