@@ -17,12 +17,12 @@ if [[ $UPDATE =~ "1" ]] ; then
       done
 
       # update wallet
-      wget https://github.com/bitcoingreen/bitcoingreen/releases/download/1.2.0/bitcoingreen-1.2.0-x86_64-linux-gnu.tar.gz
-      tar -xzf bitcoingreen-1.2.0-x86_64-linux-gnu.tar.gz
-      chmod 755 bitcoingreen-1.2.0/bin/*
+      wget https://github.com/bitcoingreen/bitcoingreen/releases/download/1.2.1/bitcoingreen-1.2.1-x86_64-linux-gnu.tar.gz
+      tar -xzf bitcoingreen-1.2.1-x86_64-linux-gnu.tar.gz
+      chmod 755 bitcoingreen-1.2.1/bin/*
       rm /usr/bin/bitcoingreen*
-      mv bitcoingreen-1.2.0/bin/bitcoingreen* /usr/bin
-      rm -r bitcoingreen-1.2.0
+      mv bitcoingreen-1.2.1/bin/bitcoingreen* /usr/bin
+      rm -r bitcoingreen-1.2.1
 
       rm .bitcoingreen_*/mn*
 
