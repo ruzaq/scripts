@@ -30,7 +30,7 @@ if [[ $UPDATE =~ "1" ]] ; then
       sleep 60
 
       for filename in bin/bitcoingreend_*.sh; do
-        sh $filename
+        sh $filename -resync
       done
       echo "Wait for blockchain to restart... (ca 3 mins)"
 
