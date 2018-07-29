@@ -14,7 +14,7 @@ echo "!                                                 !"
 echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 echo && echo && echo
 
-URL_BITG="https://github.com/bitcoingreen/bitcoingreen/releases/download/1.1.0/bitcoingreen-1.1.0-x86_64-linux-gnu.tar.gz"
+URL_BITG="https://github.com/bitcoingreen/bitcoingreen/releases/download/1.2.1/bitcoingreen-1.2.1-x86_64-linux-gnu.tar.gz"
 URL_BITG_PEERS=" https://github.com/XeZZoR/scripts/raw/master/BITG/peers.dat"
 
 

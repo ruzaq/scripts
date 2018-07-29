@@ -1,0 +1,8 @@
+Execute the following steps one by one to update your linux Masternodes!
+
+Deviantd stop
+rm Deviant*
+wget https://github.com/Deviantcoin/Wallet/raw/master/Deviantcoin%20(Linux).zip
+unzip Deviant*
+sudo mv  Deviant/ /usr/bin
+Deviantd -daemon
